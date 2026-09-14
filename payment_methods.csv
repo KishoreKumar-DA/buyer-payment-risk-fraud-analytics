@@ -1,0 +1,9 @@
+payment_method_id,payment_method,payment_category
+1,Credit Card,Card
+2,Debit Card,Card
+3,UPI,Bank Transfer
+4,Digital Wallet,Wallet
+5,Net Banking,Bank Transfer
+6,PayPal,Wallet
+7,Gift Card,Stored Value
+8,Buy Now Pay Later,Credit

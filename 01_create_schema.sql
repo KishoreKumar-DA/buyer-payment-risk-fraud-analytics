@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS amazon_risk_analytics;
+USE amazon_risk_analytics;
+CREATE TABLE customers (customer_id INT PRIMARY KEY, signup_date DATE, customer_segment VARCHAR(30), country VARCHAR(50));
+CREATE TABLE payment_methods (payment_method_id INT PRIMARY KEY, payment_method VARCHAR(50), payment_category VARCHAR(50));
+CREATE TABLE devices (device_id INT PRIMARY KEY, device_type VARCHAR(30), os VARCHAR(30));
+CREATE TABLE transactions (transaction_id BIGINT PRIMARY KEY, customer_id INT, transaction_datetime DATETIME, payment_method_id INT, device_id INT, transaction_amount DECIMAL(12,2), payment_status VARCHAR(20), fraud_flag TINYINT, account_age_days INT, transaction_velocity_24h INT, payment_failures_30d INT, previous_chargebacks INT);
+CREATE TABLE transaction_risk_signals (transaction_id BIGINT PRIMARY KEY, high_value_flag TINYINT, new_account_flag TINYINT, high_velocity_flag TINYINT, multiple_payment_failures_flag TINYINT, previous_chargeback_flag TINYINT, device_account_count INT, unusual_location_flag TINYINT, risk_score DECIMAL(5,1), risk_level VARCHAR(20));
+CREATE TABLE fraud_cases (case_id BIGINT PRIMARY KEY, transaction_id BIGINT, customer_id INT, case_open_date DATE, case_severity VARCHAR(20), investigation_status VARCHAR(30), resolution_hours DECIMAL(8,1));
+CREATE TABLE customer_friction (friction_event_id BIGINT PRIMARY KEY, transaction_id BIGINT, customer_id INT, event_datetime DATETIME, friction_type VARCHAR(40), resolution VARCHAR(30));
+CREATE TABLE dim_date (date DATE PRIMARY KEY, year INT, quarter VARCHAR(5), month INT, month_name VARCHAR(20), week INT, day_name VARCHAR(20));
